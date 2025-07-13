@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/gean12390/Mercattix/issues"
   },
-  "homepage": "https://github.com/gean12390/Mercattix#readme"
+  "homepage": "https://github.com/gean12390/Mercattix#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
