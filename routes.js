@@ -28,7 +28,7 @@ rotas.post ('/contato', (req, res) => {
         const mensagem = req.body.message;
 
         console.log(`Contato recebido de ${nome} (${email}): ${mensagem}`);
-        res.send('Contato recebido com')
+        res.send('Contato recebido com sucesso!');
 
 
 
