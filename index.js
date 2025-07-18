@@ -2,7 +2,7 @@
 const express = require ('express');
 const app = express ();
 const PORT = 3000;
-const rotas = require('./routes.js');
+const rotas = require('./routes/routes.js');
 const path = require('path');
 
 app.use(rotas)
