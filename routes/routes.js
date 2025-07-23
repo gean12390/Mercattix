@@ -10,8 +10,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true, // true for 465, false for other ports
   auth: {
-    user: "juan16fotran@gmail.com",
-    pass: "cmqkladfieprsesn",
+    user: "gabrieldiastrin63@gmail.com",
+    pass: "usen dkyn hfou ehvo",
   },
 });
 
@@ -29,21 +29,52 @@ app.get ('/', (req, res) => {
     }
 });
 
+app.get('/register', (req, res) => {
+  try {
+    const registerHtmlContent = fs.readFileSync(path.join(__dirname, "../public/html/register.html"), "utf-8");
+    res.send(registerHtmlContent)
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.get('/login', (req, res) => {
+  try {
+    const loginHtmlContent = fs.readFileSync(path.join(__dirname, "../public/html/login.html"), "utf-8");
+    res.send(loginHtmlContent)
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.post("/contato", async (req, res) => {
-  transporter.sendMail({
-    from: 'Contato do Site" <juan16fotran@gmail.com>',
-    to: 'juan16fotran@gmail.com',
-    subject: 'Nova mensagem de contato',
-    text: `Nome: ${req.body.name}\nEmail: ${req.body.email}\nMensagem: ${req.body.message}`,
-  })
-
-
   const { name, email, message } = req.body;
   if (!name || !email || !message) {
     return res.status(400).json({ error: "Todos os campos são obrigatórios." });
   }
 
-  console.log("Nova mensagem de contato:", { name, email, message });
+  transporter.sendMail({
+    from: 'gabrieldiastrin63@gmail.com',
+    to: 'gabrieldiastrin63@gmail.com',
+    subject: 'Nova mensagem de contato - Mercattix',
+    text: `
+  Olá ${req.body.name},
+
+  Você recebeu uma nova mensagem através do formulário de contato da landing page da Mercattix.
+
+  📩 Detalhes da mensagem:
+
+  👤 Nome: ${req.body.name}
+  📧 E-mail: ${req.body.email}
+  📝 Mensagem: 
+  ${req.body.message}
+
+  Verifique e entre em contato com o interessado o quanto antes.
+
+  —
+  Mercattix - Gestão inteligente para lojas online.
+  `,
+  });
 
   return res.status(200).json({ success: true });
 });

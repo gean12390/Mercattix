@@ -1,0 +1,117 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background: #FAFAF7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  animation: fadeIn 1s ease;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo img {
+  height: 150px;
+  width: auto;
+  object-fit: contain;
+}
+
+.form-card {
+  background: white;
+  padding: 3rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+  width: 100%;
+  transition: transform 0.3s;
+}
+
+.form-card:hover {
+  transform: translateY(-4px);
+}
+
+h2 {
+  color: #FF6A1A;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.input-group {
+  margin-bottom: 1.2rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #1A1D25;
+  font-weight: 600;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #DDD;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+  font-size: 1rem;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  border-color: #FF6A1A;
+  outline: none;
+}
+
+button {
+  background-color: #FF6A1A;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #e75b0f;
+}
+
+.login-link {
+  margin-top: 1rem;
+  text-align: center;
+  color: #333;
+}
+
+.login-link a {
+  color: #FF6A1A;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
