@@ -3,7 +3,8 @@ const app = express();
 const fs = require('fs');
 const path = require('path');
 const nodemailer = require("nodemailer");
-
+const { log } = require('console');
+const registrados = []
 // Create a test account or replace with real credentials.
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -78,5 +79,28 @@ app.post("/contato", async (req, res) => {
 
   return res.status(200).json({ success: true });
 });
+
+app.post ('/api/auth/register', async (req, res) => {
+
+  console.log(req.body)
+
+  
+   const { name, email, password, confirmPassword, storeName, cnpj, phone, role } = req.body;
+   const user = {
+       name,
+       email,
+       password,
+       confirmPassword,
+       storeName,
+       cnpj,
+       phone,
+       role
+   };
+    
+   registrados.push(user)
+    res.send('Cadastro realizado com sucesso!');
+
+    console.log(registrados)
+})
 
 module.exports = app;
