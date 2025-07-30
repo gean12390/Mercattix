@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const nodemailer = require("nodemailer");
 const { log } = require('console');
-const registrados = []
+const registrados = [];
 // Create a test account or replace with real credentials.
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -48,6 +48,15 @@ app.get('/login', (req, res) => {
   }
 });
 
+app.get('/dashboard', (req, res) => {
+  try {
+    const dashboardHtmlContent = fs.readFileSync(path.join(__dirname, "../public/html/dashboard.html"), "utf-8");
+    res.send(dashboardHtmlContent);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.post("/contato", async (req, res) => {
   const { name, email, message } = req.body;
   if (!name || !email || !message) {
@@ -80,11 +89,7 @@ app.post("/contato", async (req, res) => {
   return res.status(200).json({ success: true });
 });
 
-app.post ('/api/auth/register', async (req, res) => {
-
-  console.log(req.body)
-
-  
+app.post('/api/auth/register', async (req, res) => {
    const { name, email, password, confirmPassword, storeName, cnpj, phone, role } = req.body;
    const user = {
        name,
@@ -94,13 +99,29 @@ app.post ('/api/auth/register', async (req, res) => {
        storeName,
        cnpj,
        phone,
-       role
    };
     
    registrados.push(user)
-    res.send('Cadastro realizado com sucesso!');
+   res.send('Cadastro realizado com sucesso!');
+   console.log(registrados)
+});
 
-    console.log(registrados)
-})
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = registrados.find(user => user.email === email && user.password === password);
+
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    res.status(200).json({ message: 'Login successful' });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 module.exports = app;

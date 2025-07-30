@@ -19,7 +19,6 @@ form.addEventListener("submit", async (e) => {
         storeName: form.storeName.value,
         cnpj: form.cnpj.value,
         phone: form.phone.value,
-        role: form.role.value
       };
 
       const response = await fetch("/api/auth/register", {
